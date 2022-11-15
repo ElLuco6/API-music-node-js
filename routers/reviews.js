@@ -1,13 +1,13 @@
 const express = require('express'),
       router = express.Router(),
-      albumsController = require('../controller/albums');
+      reviewsController = require('../controller/reviews');
       //loginMiddleware = require();
 
-router.get('/', albumsController.getalbums);
-router.get('/:id', albumsController.getBookById);
-router.post('/', albumsController.addBook);
-//router.post('/',loginMiddleware, albumsController.addBook);
-router.delete('/:id', albumsController.deleteBookById);
-//router.delete('/:id',loginMiddleware, albumsController.deleteBookById);
+router.get('/', reviewsController.getreviews);
+router.get('/:id', reviewsController.getReviewById);
+router.post('/', reviewsController.addReview);
+//router.post('/',loginMiddleware, reviewsController.addReview);
+router.delete('/:id', reviewsController.deleteReviewById);
+//router.delete('/:id',loginMiddleware, reviewsController.deleteReviewById);
 
 module.exports = router;

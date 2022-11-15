@@ -26,7 +26,7 @@ app.use('/users',auth, usersRouter);
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews',auth, reviewsRouter);
 
-const loginRouter = require('./routers/login');
+const loginRouter = require('./controller/login');
 app.use('/login', loginRouter);
 
 app.use((error, req, res, next) => {
