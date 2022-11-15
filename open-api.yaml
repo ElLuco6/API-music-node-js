@@ -1,0 +1,412 @@
+openapi: 3.0.3
+info:
+  title: KAARAT-OK
+  description: This API manage a track Service
+  contact:
+    email: dev@kaaraOK.com
+  version: 1.0.0
+servers:
+  - url: "{protocol}://{server}"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      server:
+        default: localhost:3000
+tags:
+  - name: track
+    description: Everything about track
+  - name: users
+    description: Everything about Users
+  - name: reviews
+    description: Everything about Reviews
+  - name: album
+    description: Everything about album
+paths:
+  /track:
+    get:
+      tags:
+        - track
+      summary: Get all track
+      description: Return all track available on the kaaraOK
+      operationId: getAllTrack
+      responses:
+        "200":
+          description: Tracks fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrackList"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - track
+      summary: Add a new track to the store
+      operationId: addTrack
+      requestBody:
+        $ref: "#/components/requestBodies/TrackCreation"
+      responses:
+        "201":
+          $ref: "#/components/responses/ResourceCreated"
+        "400":
+          $ref: "#/components/responses/InvalidBody"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /track/{id}:
+    get:
+      tags:
+        - track
+      summary: Get a track by its id
+      operationId: getTrackById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Track fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Track"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - track
+      summary: Delete a track by its id
+      operationId: deleteTrackById
+      parameters:
+        - $ref : '#/components/parameters/idInPath'
+      responses:
+        "200":
+          description: Track deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ success ]
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - track
+      summary: Update a track 
+      operationId: updateTrack
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Track updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Track"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /users:
+    get:
+      tags:
+        - users
+      summary: Get all user
+      description: Return all users available on the kaaraOK
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: Users fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersList"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - users
+      summary: Add a new user to the database
+      operationId: addUsers
+      requestBody:
+        $ref: "#/components/requestBodies/UserCreation"
+      responses:
+        "201":
+          $ref: "#/components/responses/ResourceCreated"
+        "400":
+          $ref: "#/components/responses/InvalidBody"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /users/{id}:
+    get:
+      tags:
+        - users
+      summary: Get a user by its id
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: user fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - users
+      summary: Delete a user by its id
+      operationId: deleteUsersById
+      parameters:
+        - $ref : '#/components/parameters/idInPath'
+      responses:
+        "200":
+          description: user deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ success ]
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - users
+      summary: Update a user 
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          $ref: "#/components/responses/NotFound"    
+  /albums:
+    get:
+      tags:
+        - albums
+      summary: Get all albums
+      description: Return all albums available on the kaaraOK
+      operationId: getAllAlbums
+      responses:
+        "200":
+          description: albums fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlbumsList"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - albums
+      summary: Add a new album to the database
+      operationId: addAlbums
+      requestBody:
+        $ref: "#/components/requestBodies/AlbumsCreation"
+      responses:
+        "201":
+          $ref: "#/components/responses/ResourceCreated"
+        "400":
+          $ref: "#/components/responses/InvalidBody"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /albums/{id}:
+    get:
+      tags:
+        - albums
+      summary: Get a album by its id
+      operationId: getAlbumsById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: albums fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Albums"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - albums
+      summary: Delete a albums by its id
+      operationId: deleteAlbumsById
+      parameters:
+        - $ref : '#/components/parameters/idInPath'
+      responses:
+        "200":
+          description: albums deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ success ]
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - albums
+      summary: Update a albums 
+      operationId: updateAlbums
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Albums updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Albums"
+        "404":
+          $ref: "#/components/responses/NotFound"      
+components:
+  parameters:
+    idInPath:
+      required: true
+      name: id
+      in: path
+      schema:
+        type: integer
+  schemas:
+    TrackList:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: true
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Track'
+    Track:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "My track"
+        date:
+          type: string
+          format: date
+          example: "2022-10-25"
+  requestBodies:
+    TrackCreation:
+      required: true
+      description: Track object that needs to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Track'
+  responses:
+    ResourceCreated:
+      description: "The resource has been created"
+      content:
+        application/json:
+          schema:
+            type: object
+            required : [ success, id ]
+            properties:
+              success:
+                type: boolean
+                default: true
+                example: true
+              id:
+                type: integer
+                example: 1
+                description: "The id of the ressource created"
+    NotFound:
+      description: "The resource specified is not found"
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [ success, message ]
+            properties:
+              success:
+                type: boolean
+                default: false
+                example: false
+              message:
+                type: string
+                default: ""
+                example: "This ressource with this id is not found"
+    InvalidBody:
+      description: "The body sent to the request is invalid"
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [ success, message ]
+            properties:
+              success:
+                type: boolean
+                default: false
+                example: false
+              message:
+                type: string
+                default: ""
+                example: "Please make sure that all args on the body are ok"
+    InternalServerError:
+      description: "An internal server error occurred"
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [ success, message ]
+            properties:
+              success:
+                type: boolean
+                default: false
+                example: false
+              message:
+                type: string
+                default: "An unknown server error occurred"
+                example: "An unknown server error occurred"
