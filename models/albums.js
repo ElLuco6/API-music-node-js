@@ -1,22 +1,22 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (instance) => {
-    return instance.define('user', {
-        userId: {
+    return instance.define('track', {
+        albumId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        userName: {
+        albumName: {
             type: DataTypes.STRING,
             primaryKey: true,
         },
-        password: {
+        author: {
             type: DataTypes.STRING,
         },
-        isAdmin: {
-            type: DataTypes.BOOLEAN,
+        realeaseDate: {
+            type: DataTypes.DATE,
         }
     }, {
         timestamps: false
