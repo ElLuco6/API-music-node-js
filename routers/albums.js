@@ -4,10 +4,10 @@ const express = require('express'),
       //loginMiddleware = require();
 
 router.get('/', albumsController.getalbums);
-router.get('/:id', albumsController.getBookById);
-router.post('/', albumsController.addBook);
-//router.post('/',loginMiddleware, albumsController.addBook);
-router.delete('/:id', albumsController.deleteBookById);
-//router.delete('/:id',loginMiddleware, albumsController.deleteBookById);
+router.get('/:id', albumsController.getAlbumById);
+router.post('/', albumsController.addAlbum);
+//router.post('/',loginMiddleware, albumsController.addAlbum);
+router.delete('/:id', albumsController.deleteAlbumById);
+//router.delete('/:id',loginMiddleware, albumsController.deleteAlbumById);
 
 module.exports = router;

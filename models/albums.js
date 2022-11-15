@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (instance) => {
-    return instance.define('track', {
+    return instance.define('album', {
         albumId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -10,7 +10,6 @@ module.exports = (instance) => {
         },
         albumName: {
             type: DataTypes.STRING,
-            primaryKey: true,
         },
         author: {
             type: DataTypes.STRING,

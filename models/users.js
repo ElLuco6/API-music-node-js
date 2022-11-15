@@ -10,7 +10,6 @@ module.exports = (instance) => {
         },
         userName: {
             type: DataTypes.STRING,
-            primaryKey: true,
         },
         password: {
             type: DataTypes.STRING,

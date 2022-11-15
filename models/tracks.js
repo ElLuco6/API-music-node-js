@@ -10,10 +10,12 @@ module.exports = (instance) => {
         },
         trackName: {
             type: DataTypes.STRING,
-            primaryKey: true,
+        },
+        author: {
+            type: DataTypes.STRING,
         },
         fromAlbum: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
         },
         realeaseDate: {
             type: DataTypes.DATE,
