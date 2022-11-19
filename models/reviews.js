@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (instance) => {
-    return instance.define('track', {
+    return instance.define('review', {
         trackId: {
             type: DataTypes.INTEGER,
             primaryKey: true,
