@@ -1,0 +1,13 @@
+ajouter le sécurity
+
+Pour le addUser dans le controlleur faire gaff a bien coder le mot de passe dans le service.
+
+Faire gaff au reviews controller gros doute avec les primary keys etc
+
+
+****//////****
+19/11
+
+Controller fais a partir du model du prof voir les différence avec notre api 
+
+---Potentiellement voir ou utiliser le module http de axios. 
