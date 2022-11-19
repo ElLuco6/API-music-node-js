@@ -25,6 +25,11 @@ tags:
   - name: album
     description: Everything about album
 paths:
+  /login:
+    post:
+      responses:
+        "200":
+          description: "OK"
   /track:
     get:
       tags:
@@ -208,7 +213,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/Users"
         "404":
           $ref: "#/components/responses/NotFound"    
   /albums:
@@ -304,6 +309,99 @@ paths:
                 $ref: "#/components/schemas/Albums"
         "404":
           $ref: "#/components/responses/NotFound"      
+  /reviews:
+    get:
+      tags:
+        - reviews
+      summary: Get all reviews
+      description: Return all reviews available on the kaaraOK
+      operationId: getAllReviews
+      responses:
+        "200":
+          description: reviews fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewsList"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - reviews
+      summary: Add a new album to the database
+      operationId: addReviews
+      requestBody:
+        $ref: "#/components/requestBodies/ReviewsCreation"
+      responses:
+        "201":
+          $ref: "#/components/responses/ResourceCreated"
+        "400":
+          $ref: "#/components/responses/InvalidBody"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /reviews/{id}:
+    get:
+      tags:
+        - reviews
+      summary: Get a album by its id
+      operationId: getReviewsById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: reviews fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reviews"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - reviews
+      summary: Delete a reviews by its id
+      operationId: deleteReviewsById
+      parameters:
+        - $ref : '#/components/parameters/idInPath'
+      responses:
+        "200":
+          description: reviews deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ success ]
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+        "404":
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags:
+        - reviews
+      summary: Update a reviews 
+      operationId: updateReviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Reviews updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reviews"
+        "404":
+          $ref: "#/components/responses/NotFound" 
 components:
   parameters:
     idInPath:
@@ -327,13 +425,96 @@ components:
     Track:
       type: object
       properties:
-        id:
+        trackId:
           type: integer
           example: 1
-        title:
+        trackName:
           type: string
           example: "My track"
-        date:
+        realeaseDate:
+          type: string
+          format: date
+          example: "2022-10-25"
+        fromAlbum:
+          type: string
+          example: "My Albums"
+    AlbumsList:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: true
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Albums'
+    Albums:
+      type: object
+      properties:
+        albumId:
+          type: integer
+          example: 1
+        albumName:
+          type: string
+          example: "My track"
+        author:
+          type: string
+          example: "JACK UZZZZZZZZYYYYYYYYYYYYYYY"
+        realeaseDate:
+          type: string
+          format: date
+          example: "2022-10-25"
+    UsersList:
+        type: object
+        properties:
+          success:
+            type: boolean
+            default: true
+            example: true
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Users'
+    Users:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        userName:
+          type: string
+          example: "LUCAS"
+        password:
+          type: string
+          example: "123456"
+        isAdmin:
+          type: boolean
+          example: true
+    ReviewsList:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: true
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Albums'
+    Reviews:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        trackId:
+          type: integer
+          example: 100
+        rating:
+          type: integer
+          example: 10
+        ratingDate:
           type: string
           format: date
           example: "2022-10-25"
@@ -345,6 +526,27 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Track'
+    UserCreation:
+      required: true
+      description: User object that needs to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Users'
+    AlbumsCreation:
+      required: true
+      description: Albums object that needs to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Albums'
+    ReviewsCreation:
+      required: true
+      description: Reviews object that needs to be created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Reviews'
   responses:
     ResourceCreated:
       description: "The resource has been created"
