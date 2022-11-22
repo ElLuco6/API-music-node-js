@@ -3,7 +3,7 @@ const express = require('express'),
       albumsController = require('../controller/albums');
       //loginMiddleware = require();
 
-router.get('/', albumsController.getalbums);
+router.get('/', albumsController.getAlbums);
 router.get('/:id', albumsController.getAlbumById);
 router.post('/', albumsController.addAlbum);
 //router.post('/',loginMiddleware, albumsController.addAlbum);

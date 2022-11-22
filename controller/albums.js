@@ -30,12 +30,12 @@ exports.addAlbum = async (req, res, next) => {
    }
 }
 
-exports.deleteAlbumsById = async (req, res, next) => {
+exports.deleteAlbumById = async (req, res, next) => {
    if (req.params.id) {
       const id = parseInt(req.params.id);
       const albums = await albumsService.getAlbumById(id);
       if (albums.length === 1) {
-         const nbOfDeletion = await albumsService.deleteAlbumsById(id);
+         const nbOfDeletion = await albumsService.deleteAlbumById(id);
          if (nbOfDeletion === 1) {
             res.json({success: true});
          } else {

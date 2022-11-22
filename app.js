@@ -14,6 +14,7 @@ app.use(
         apiSpec: './open-api.yaml'
     })
 );
+/*
 const albumsRouter = require('./routers/albums');
 app.use('/albums',auth, albumsRouter);
 
@@ -25,9 +26,21 @@ app.use('/users',auth, usersRouter);
 
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews',auth, reviewsRouter);
+*/
+const albumsRouter = require('./routers/albums');
+app.use('/albums', albumsRouter);
 
-const loginRouter = require('./controller/login');
-app.use('/login', loginRouter);
+const tracksRouter = require('./routers/tracks');
+app.use('/tracks',tracksRouter);
+
+const usersRouter = require('./routers/users');
+app.use('/users', usersRouter);
+
+const reviewsRouter = require('./routers/reviews');
+app.use('/reviews', reviewsRouter);
+
+//const loginRouter = require('./controller/login');
+//app.use('/login', loginRouter);
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500)

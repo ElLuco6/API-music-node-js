@@ -3,9 +3,10 @@ const express = require('express'),
       reviewsController = require('../controller/reviews');
       //loginMiddleware = require();
 
-router.get('/', reviewsController.getreviews);
+router.get('/', reviewsController.getReviews);
 router.get('/:id', reviewsController.getReviewById);
 router.post('/', reviewsController.addReview);
+router.put('/', reviewsController.updateReview);
 //router.post('/',loginMiddleware, reviewsController.addReview);
 router.delete('/:id', reviewsController.deleteReviewById);
 //router.delete('/:id',loginMiddleware, reviewsController.deleteReviewById);

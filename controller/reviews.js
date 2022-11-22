@@ -30,12 +30,12 @@ exports.addReview = async (req, res, next) => {
    }
 }
 
-exports.deleteReviewsById = async (req, res, next) => {
+exports.deleteReviewById = async (req, res, next) => {
    if (req.params.id) {
       const id = parseInt(req.params.id);
       const reviews = await reviewsService.getReviewById(id);
       if (reviews.length === 1) {
-         const nbOfDeletion = await reviewsService.deleteReviewsById(id);
+         const nbOfDeletion = await reviewsService.deleteReviewById(id);
          if (nbOfDeletion === 1) {
             res.json({success: true});
          } else {
@@ -49,12 +49,12 @@ exports.deleteReviewsById = async (req, res, next) => {
    }
 }
 
-exports.updateReviews = async (req, res, next) => {
+exports.updateReview = async (req, res, next) => {
     if (req.params.id) {
        const id = parseInt(req.params.id);
        const reviews = await reviewsService.getReviewById(id);
        if (reviews.length === 1) {
-          const nbOfUpdate = await reviewsService.updateReviews(id,req.body.rating, req.body.ratingDate);
+          const nbOfUpdate = await reviewsService.updateReview(id,req.body.rating, req.body.ratingDate);
           if (nbOfUpdate === 1) {
              res.json({success: true});
           } else {

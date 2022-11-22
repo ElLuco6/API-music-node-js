@@ -16,6 +16,16 @@ exports.addAlbum = (albumName, author, realeaseDate) => {
     return db.albums.create({albumName, author, realeaseDate});
 }
 
+exports.updateAlbum = (albumName, author, realeaseDate) => {
+    return db.users.update(
+        {
+            albumName: albumName,
+            author: author,
+            realeaseDate : realeaseDate,
+        }
+      );
+}
+
 exports.deleteAlbumById = (albumId) => {
     return db.albums.destroy({
         where: {

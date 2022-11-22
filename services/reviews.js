@@ -16,6 +16,17 @@ exports.addReview = (trackId, userId, rating, ratingDate) => {
     return db.reviews.create({trackId, userId, rating, ratingDate});
 }
 
+exports.updateReview = (trackId, userId, rating, ratingDate) => {
+    return db.users.update(
+        {
+            trackId: trackId,
+            userId: userId,
+            rating : rating,
+            ratingDate : ratingDate
+        }
+      );
+}
+
 exports.deleteReviewById = (trackId, userId) => {
     return db.reviews.destroy({
         where: {
