@@ -5,32 +5,32 @@ exports.getUsers = () => {
     return db.users.findAll();
 }
 
-exports.getUserById = (id) => {
+exports.getUserById = (userId) => {
     return db.users.findAll({
         where: {
-            id
+            userId
         }
     });
 }
 
-exports.addUser = (userName, password, isAdmin) => {
-    return db.users.create({userName, password, isAdmin});
+exports.addUser = (username, password, isAdmin) => {
+    return db.users.create({username, password, isAdmin});
 }
 
-exports.updateUser = (userName, password, isAdmin) => {
+exports.updateUser = (username, password, isAdmin) => {
     return db.users.update(
         {
-          username: userName,
+          username: username,
           password: password,
-          isadmin : isAdmin
+          isAdmin : isAdmin
         }
       );
 }
 
-exports.deleteUserById = (id) => {
+exports.deleteUserById = (userId) => {
     return db.users.destroy({
         where: {
-            id
+            userId
         }
     });
 }

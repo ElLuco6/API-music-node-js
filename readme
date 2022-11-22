@@ -9,5 +9,5 @@ Faire gaff au reviews controller gros doute avec les primary keys etc
 19/11
 
 Controller fais a partir du model du prof voir les différence avec notre api 
-
+    - Add track, vérif dans le controller qu'elle existe déjà ou on autorise les doublons ? 
 ---Potentiellement voir ou utiliser le module http de axios. 
