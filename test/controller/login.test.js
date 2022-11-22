@@ -1,9 +1,9 @@
 const request = require('supertest');
 const app = require('../../app');
 
-describe('get users endpoint', () => {
+describe('get tracks endpoint', () => {
     it('should return collection of books', async () => {
-        const resp = await request(app).get('/users');
+        const resp = await request(app).get('/tracks');
         expect(resp.statusCode).toEqual(200);
         expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('data');
@@ -13,7 +13,7 @@ describe('get users endpoint', () => {
     });
 
     it('should fail when book not found', async () => {
-        const resp = await request(app).get('/users/10');
+        const resp = await request(app).get('/tracks/10');
         expect(resp.statusCode).toEqual(404);
         expect(resp.body).not.toBeNull();
         expect(resp.body).not.toHaveProperty('data');
@@ -24,9 +24,9 @@ describe('get users endpoint', () => {
     });
 });
 
-describe('post users endpoint', () => {
+describe('post tracks endpoint', () => {
     it('should add book successfully', async () => {
-        const resp = await request(app).post('/users').send({
+        const resp = await request(app).post('/tracks').send({
             title: 'test',
             date: '10/10/2022'
         });
@@ -38,7 +38,7 @@ describe('post users endpoint', () => {
     });
 
     it('should fail when property to add track is missing', async () => {
-        const resp = await request(app).post('/users').send({
+        const resp = await request(app).post('/tracks').send({
             title: 'test'
         });
         expect(resp.statusCode).toEqual(400);
