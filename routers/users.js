@@ -3,6 +3,9 @@ const express = require('express'),
       usersController = require('../controller/users');
 
 
+
+router.get('/', usersController.getUsers);
+router.get('/:id', usersController.getUsers);
 router.post('/', usersController.addUser);
 router.put('/', usersController.updateUser);
 

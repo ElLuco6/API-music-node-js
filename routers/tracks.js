@@ -5,6 +5,7 @@ const express = require('express'),
 
 router.get('/', tracksController.getTracks);
 router.get('/:id', tracksController.getTrackById);
+//router.get('/:id/review', reviewsController.getReviewById);
 router.post('/', tracksController.addTrack);
 //router.post('/',loginMiddleware, tracksController.addTrack);
 router.put('/', tracksController.updateTrack);
