@@ -1,19 +1,21 @@
 const express = require('express');
 const app = express();
 //const cors = require('cors');
-const OpenApiValidator = require('express-openapi-validator');
+//const OpenApiValidator = require('express-openapi-validator');
 //const cache = require('cache-control');
-//const apicache = require('apicache');
+const apicache = require('apicache');
 //const auth = require('./middlewares/auth')
 //app.use(cors());
 app.use(express.json());
 //app.use(cache());
 //app.use(apicache);
+/*
 app.use(
     OpenApiValidator.middleware({
         apiSpec: './open-api.yaml'
     })
 );
+*/
 /*
 const albumsRouter = require('./routers/albums');
 app.use('/albums',auth, albumsRouter);
@@ -38,6 +40,10 @@ app.use('/users', usersRouter);
 
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews', reviewsRouter);
+
+app.get('/cache/index', (req, res) => {
+    res.json(apicache.getIndex())
+  })
 
 //const loginRouter = require('./controller/login');
 //app.use('/login', loginRouter);

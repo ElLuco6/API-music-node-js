@@ -1,5 +1,6 @@
 const usersService = require('../services/users');
 const createError = require('http-errors');
+const apicache = require('apicache')
 
 exports.getUsers = async (req, res, next) => {
    const users = await usersService.getUsers();
@@ -60,8 +61,7 @@ exports.updateUser = async (req, res, next) => {
     if (req.params.id) {
        const id = parseInt(req.params.id);
        const users = await usersService.getUserById(id);
-       console.log(req.body.isAdmin)
-       if (req.body.isAdmin == 1 || req.body.isAdmin == 0 || req.body.isAdmin == 'true'|| req.body.isAdmin == 'false'){
+       if (req.body.isAdmin =="true" || req.body.isAdmin == "false"){
          if (users.length === 1) {
             const nbOfUpdate = await usersService.updateUser(id,req.body.userName, req.body.password, req.body.isAdmin);
             console.log(nbOfUpdate);
@@ -81,3 +81,6 @@ exports.updateUser = async (req, res, next) => {
        next(createError(400, "UserId missing"));
     }
  }
+ exports.clearCache = async (req, res,) => {
+   res.json(apicache.clear("/users/"))
+}
