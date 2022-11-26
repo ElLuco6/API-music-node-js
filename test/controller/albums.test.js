@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../app');
 
 describe('get albums endpoint', () => {
-    it('should return collection of books', async () => {
+    it('should return collection of albums', async () => {
         const resp = await request(app).get('/albums');
         expect(resp.statusCode).toEqual(200);
         expect(resp.body).not.toBeNull();
@@ -12,7 +12,7 @@ describe('get albums endpoint', () => {
         expect(resp.body.data).toHaveLength(3);
     });
 
-    it('should fail when book not found', async () => {
+    it('should fail when albums not found', async () => {
         const resp = await request(app).get('/albums/101');
         expect(resp.statusCode).toEqual(404);
         expect(resp.body).not.toBeNull();
@@ -25,10 +25,11 @@ describe('get albums endpoint', () => {
 });
 
 describe('post albums endpoint', () => {
-    it('should add book successfully', async () => {
+    it('should add albums successfully', async () => {
         const resp = await request(app).post('/albums').send({
-            title: 'test',
-            date: '10/10/2022'
+            albumName: 'test',
+            author: 'eminem',
+            realeaseDate: "12-15-2012"
         });
         expect(resp.statusCode).toEqual(201);
         expect(resp.body).not.toBeNull();
@@ -40,7 +41,6 @@ describe('post albums endpoint', () => {
     it('should fail when property to add track is missing', async () => {
         const resp = await request(app).post('/albums').send({
             albumName: 'test',
-            author: 'eminem',
             realeaseDate: "12-15-2012"
         });
         expect(resp.statusCode).toEqual(400);
