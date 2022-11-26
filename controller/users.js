@@ -42,6 +42,7 @@ exports.deleteUserById = async (req, res, next) => {
       const users = await usersService.getUserById(id);
       if (users.length === 1) {
          const nbOfDeletion = await usersService.deleteUserById(id);
+         console.log(nbOfDeletion);
          if (nbOfDeletion === 1) {
             res.json({success: true});
          } else {
@@ -56,10 +57,11 @@ exports.deleteUserById = async (req, res, next) => {
 }
 
 exports.updateUser = async (req, res, next) => {
-    if (req.params.id && req.body.isAdmin) {
+    if (req.params.id) {
        const id = parseInt(req.params.id);
        const users = await usersService.getUserById(id);
-       if (req.body.isAdmin == 1 || req.body.isAdmin == 0 || req.body.isAdmin == true || req.body.isAdmin == false){
+       console.log(req.body.isAdmin)
+       if (req.body.isAdmin == 1 || req.body.isAdmin == 0 || req.body.isAdmin == 'true'|| req.body.isAdmin == 'false'){
          if (users.length === 1) {
             const nbOfUpdate = await usersService.updateUser(id,req.body.userName, req.body.password, req.body.isAdmin);
             console.log(nbOfUpdate);
@@ -67,15 +69,15 @@ exports.updateUser = async (req, res, next) => {
                console.log(nbOfUpdate);
                res.json({success: true,userId: id,userName : req.body.userName ,password: req.body.password,isAdmin:req.body.isAdmin });
             } else {
-               next(createError(500, 'User already updated with those args or incorect args'));
+               next(createError(500, 'User already updated with those args'));
             }
          } else {
             next(createError(404, `The user with id '${id}' doesn't exists, it cannot be updated`));
          }
       } else{
-         next(createError(500, 'Incorect args'));
+         next(createError(400, 'Incorect args'));
       }
     } else {
-       next(createError(400, "The userId and isAdmin are required"));
+       next(createError(400, "UserId missing"));
     }
  }
