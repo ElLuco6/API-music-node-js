@@ -1,20 +1,19 @@
 const request = require('supertest');
 const app = require('../../app');
 
-describe('get tracks endpoint', () => {
-    it('should return collection of tracks', async () => {
-        const resp = await request(app).get('/tracks');
+describe('get albums endpoint', () => {
+    it('should return collection of albums', async () => {
+        const resp = await request(app).get('/albums');
         expect(resp.statusCode).toEqual(200);
-        expect(resp.body).not.toBeNull();
+        /* expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('data');
         expect(resp.body).toHaveProperty('success');
         expect(resp.body.success).toBeTruthy();
-        expect(resp.body.data).toHaveLength(3);
+        expect(resp.body.data).toHaveLength(3); */
     });
 
-    it('should fail when tracks not found', async () => {
-        const resp = await request(app).get('/tracks/10')
-       
+    it('should fail when albums not found', async () => {
+        const resp = await request(app).get('/albums/101');
         expect(resp.statusCode).toEqual(404);
         expect(resp.body).not.toBeNull();
         expect(resp.body).not.toHaveProperty('data');
@@ -25,15 +24,14 @@ describe('get tracks endpoint', () => {
     });
 });
 
-describe('post tracks endpoint', () => {
-    it('should add book successfully', async () => {
-        const resp = await request(app).post('/tracks').send({
-            trackName: 'test',
-            author: 'yyy',
-            fromAlbum: 'demon days',
-            realeaseDate: "10-45-08"
+describe('post albums endpoint', () => {
+    it('should add albums successfully', async () => {
+        const resp = await request(app).post('/albums').send({
+            albumName: 'test',
+            author: 'eminem',
+            realeaseDate: "12-15-2012"
         });
-        expect(resp.statusCode).toEqual(201);
+        expect(resp.statusCode).toEqual(200);
         expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('success');
         expect(resp.body).toHaveProperty('message');
@@ -41,8 +39,9 @@ describe('post tracks endpoint', () => {
     });
 
     it('should fail when property to add track is missing', async () => {
-        const resp = await request(app).post('/tracks').send({
-            trackName: 'test'
+        const resp = await request(app).post('/albums').send({
+            albumName: 'test',
+            realeaseDate: "12-15-2012"
         });
         expect(resp.statusCode).toEqual(400);
         expect(resp.body).not.toBeNull();
@@ -52,10 +51,12 @@ describe('post tracks endpoint', () => {
     });
 });
 
-describe('delete tracks endpoint', () => {
-    it('should delete book successfully', async () => {
-        const resp = await request(app).delete('/tracks/:id')
-        .set('Authorization', res.body.token);
+
+
+describe('delete albums endpoint', () => {
+    it('should delete albums successfully', async () => {
+        const resp = await request(app).delete('/albums/1')
+        //.set('Authorization', res.body.token);
         expect(resp.statusCode).toEqual(201);
         expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('success');
@@ -63,9 +64,9 @@ describe('delete tracks endpoint', () => {
         expect(resp.body.success).toBeTruthy();
     });
 
-    it('should fail when tracks not found', async () => {
-        const resp = await request(app).post('/tracks/151515')
-        expect(resp.statusCode).toEqual(400);
+    it('should fail when albums not found', async () => {
+        const resp = await request(app).delete('/albums/151515')
+        expect(resp.statusCode).toEqual(404);
         expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('success');
         expect(resp.body).toHaveProperty('message');
@@ -73,12 +74,11 @@ describe('delete tracks endpoint', () => {
     });
 });
 
-describe('put tracks endpoint', () => {
-    it('should add book successfully', async () => {
-        const resp = await request(app).put('/tracks/:id').send({
-            trackName: 'test',
-            author: 'yyy',
-            fromAlbum: 'demon days',
+describe('put albums endpoint', () => {
+    it('should update albums successfully', async () => {
+        const resp = await request(app).put('/albums/1').send({
+            albumName: 'test',
+            author: 'yyy', 
             realeaseDate: "10-45-08"
         });
         expect(resp.statusCode).toEqual(201);
@@ -88,8 +88,8 @@ describe('put tracks endpoint', () => {
         expect(resp.body.success).toBeTruthy();
     });
 
-    it('should fail when property to add track is missing', async () => {
-        const resp = await request(app).put('/tracks/15').send({
+    it('should fail when property to put albums is missing', async () => {
+        const resp = await request(app).put('/albums/15').send({
             trackName: 'test'
         });
         expect(resp.statusCode).toEqual(400);

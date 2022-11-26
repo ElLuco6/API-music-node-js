@@ -5,8 +5,8 @@ const express = require('express'),
 
 
 router.get('/', usersController.getUsers);
-router.get('/:id', usersController.getUsers);
+router.get('/:id', usersController.getUserById);
 router.post('/', usersController.addUser);
-router.put('/', usersController.updateUser);
-
+router.put('/:id', usersController.updateUser);
+router.delete('/:id', usersController.deleteUserById);
 module.exports = router;

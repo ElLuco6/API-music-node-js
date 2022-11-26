@@ -13,16 +13,20 @@ exports.getUserById = (userId) => {
     });
 }
 
-exports.addUser = (username, password, isAdmin) => {
-    return db.users.create({username, password, isAdmin});
+exports.addUser = (userName, password, isAdmin) => {
+    console.log(userName, password, isAdmin)
+    return db.users.create({userName, password, isAdmin});
 }
 
-exports.updateUser = (username, password, isAdmin) => {
+exports.updateUser = (id, username, password, isadmin) => {
     return db.users.update(
         {
-          username: username,
+          userName: username,
           password: password,
-          isAdmin : isAdmin
+          isAdmin : isadmin
+        },
+        {
+            where: { userId: id },
         }
       );
 }

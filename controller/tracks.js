@@ -56,12 +56,12 @@ exports.updateTrack = async (req, res, next) => {
        if (tracks.length === 1) {
           const nbOfUpdate = await tracksService.updateTrack(id,req.body.trackName, req.body.author, req.body.fromAlbum,req.body.realeaseDate);
           if (nbOfUpdate === 1) {
-             res.json({success: true});
+             res.status(201).json({success: true});
           } else {
-             next(createError(500, 'Unknown error when trying to update this track, maybe it\'s already deleted'));
+             next(createError(500, 'Unknown error when trying to update this track'));
           }
        } else {
-          next(createError(404, `The track with id '${id}' doesn't exists, it cannot be deleted`));
+          next(createError(404, `The track with id '${id}' doesn't exists, it cannot be updated`));
        }
     } else {
        next(createError(400, "The trackId is required"));
