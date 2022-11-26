@@ -2,7 +2,7 @@ const usersService = require('../services/users');
 const createError = require('http-errors');
 
 exports.getUsers = async (req, res) => {
-   const user = await usersService.getUsers();
+   const users = await usersService.getUsers();
    res.set('Cache-Control', 'max-age=30'); // Using client cache
    res.json({success: true, data: users});
 }
