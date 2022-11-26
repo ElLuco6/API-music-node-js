@@ -177,6 +177,8 @@ paths:
     delete:
       tags:
         - users
+    security:
+        - bearerAuth: []
       summary: Delete a user by its id
       operationId: deleteUsersById
       parameters:
@@ -199,6 +201,8 @@ paths:
     put:
       tags:
         - users
+    security:
+       - bearerAuth: []    
       summary: Update a user 
       operationId: updateUser
       parameters:
@@ -612,3 +616,9 @@ components:
                 type: string
                 default: "An unknown server error occurred"
                 example: "An unknown server error occurred"
+    securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Set your JWT token

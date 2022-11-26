@@ -55,8 +55,8 @@ exports.updateTrack = async (req, res, next) => {
        const tracks = await tracksService.getTrackById(id);
        if (tracks.length === 1) {
           const nbOfUpdate = await tracksService.updateTrack(id,req.body.trackName, req.body.author, req.body.fromAlbum,req.body.realeaseDate);
-          if (nbOfUpdate == 1) {
-             res.json({success: true});
+          if (nbOfUpdate === 1) {
+             res.status(201).json({success: true});
           } else {
              next(createError(500, 'Unknown error when trying to update this track'));
           }
