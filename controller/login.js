@@ -1,8 +1,12 @@
 const jwt = require('jsonwebtoken');
 const db = require('../models/index');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 exports.authMiddleware = async (req, res, next) => {
+    console.log(req.headers.authorization)
+    console.log(req.headers)
+
     if (req.headers && !req.headers.authorization) {
         res.status(401).json({success: false, message: 'You need to be authenticated'});
     } else {
@@ -20,20 +24,18 @@ exports.authMiddleware = async (req, res, next) => {
     }
 }
 
-exports.register = async (req, res) => {}
-
 exports.login = async (req, res) => {
-    if (req.body.username && req.body.password) {
+    if (req.body.userName && req.body.password) {
         const user = await db.users.findOne({
-            where: {username: req.body.username}
+            where: {userName: req.body.userName}
         });
         if (user) {
             const verifiedUser = await bcrypt.compare(req.body.password, user.password);
             if (verifiedUser) {
                 const token = jwt.sign({
-                    data: {id: user.id, username: user.username}
+                    data: {id: user.id, userName: user.userName}
                 }, process.env.SECRET, {
-                    expiresIn: '30s'
+                    expiresIn: '30m'
                 });
                 res.status(200).json({success: true, token});
             } else {

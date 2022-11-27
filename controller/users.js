@@ -2,6 +2,8 @@ const usersService = require('../services/users');
 const db = require('../models/index');
 const createError = require('http-errors');
 const apicache = require('apicache')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.getUsers = async (req, res, next) => {
    const users = await usersService.getUsers();
@@ -27,7 +29,9 @@ exports.addUser = async (req, res, next) => {
    if (req.body && req.body.userName, req.body.password, req.body.isAdmin) {
       const userTest = await db.users.findOne({where: {userName: req.body.userName}});
       if (!userTest){
-         const userCreated = await usersService.addUser(req.body.userName, req.body.password, req.body.isAdmin);
+         const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds)
+         console.log(encryptedPassword)
+         const userCreated = await usersService.addUser(req.body.userName, encryptedPassword, req.body.isAdmin);
          if (userCreated) {
             res.status(201).json({success: true, userId: userCreated.id});
          } else {

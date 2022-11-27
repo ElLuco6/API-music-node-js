@@ -25,6 +25,7 @@
     "bcrypt": "^5.1.0",
     "cache-control": "^2.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-openapi-validator": "^4.13.8",
     "http-errors": "^2.0.0",

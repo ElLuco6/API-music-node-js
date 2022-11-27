@@ -3,10 +3,10 @@ const app = express();
 const OpenApiValidator = require('express-openapi-validator');
 const apicache = require('apicache');
 app.use(express.json());
+const auth = require('./controller/login')
 
 //const cors = require('cors');
 //const cache = require('cache-control');
-//const auth = require('./middlewares/auth')
 //app.use(cors());
 /*
 app.use(
@@ -35,7 +35,7 @@ const tracksRouter = require('./routers/tracks');
 app.use('/tracks',tracksRouter);
 
 const usersRouter = require('./routers/users');
-app.use('/users', usersRouter);
+app.use('/users',auth.authMiddleware, usersRouter);
 
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews', reviewsRouter);
@@ -44,8 +44,8 @@ app.get('/cache/index', (req, res) => {
     res.json(apicache.getIndex())
   })
 
-//const loginRouter = require('./controller/login');
-//app.use('/login', loginRouter);
+const loginRouter = require('./routers/login');
+app.use('/logs', loginRouter);
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500)
