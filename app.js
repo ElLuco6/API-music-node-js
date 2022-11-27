@@ -43,6 +43,8 @@ app.use('/reviews', reviewsRouter);
 app.get('/cache/index', (req, res) => {
     res.json(apicache.getIndex())
   })
+const musicRouter = require('./routers/music');
+app.use('/music', musicRouter);
 
 const loginRouter = require('./routers/login');
 app.use('/logs', loginRouter);
