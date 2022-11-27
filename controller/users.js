@@ -26,7 +26,7 @@ exports.getUserById = async (req, res, next) => {
 }
 
 exports.addUser = async (req, res, next) => {
-   if (req.body && req.body.userName, req.body.password, req.body.isAdmin) {
+   if (req.body && req.body.userName, req.body.password) {
       const userTest = await db.users.findOne({where: {userName: req.body.userName}});
       if (!userTest){
          const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds)
@@ -90,6 +90,10 @@ exports.updateUser = async (req, res, next) => {
        next(createError(400, "UserId missing"));
     }
  }
- exports.clearCache = async (req, res,) => {
-   res.json(apicache.clear("/users/"))
+ exports.clearCache = async (req, res,next) => {
+    if(apicache.clear("/users/")){
+       res.json({success: true});
+    }else{
+      next(createError(400, "Failled to clear cache"))
+    }
 }

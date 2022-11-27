@@ -1,10 +1,11 @@
 const express = require('express');
+const cookieParser = require('cookie-parser')
 const app = express();
 const OpenApiValidator = require('express-openapi-validator');
 const apicache = require('apicache');
 app.use(express.json());
 const auth = require('./controller/login')
-
+app.use(cookieParser());
 //const cors = require('cors');
 //const cache = require('cache-control');
 //app.use(cors());
@@ -35,7 +36,7 @@ const tracksRouter = require('./routers/tracks');
 app.use('/tracks',tracksRouter);
 
 const usersRouter = require('./routers/users');
-app.use('/users',auth.authMiddleware, usersRouter);
+app.use('/users',auth.authMiddlewareAdmin, usersRouter);
 
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews', reviewsRouter);
