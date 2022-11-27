@@ -1,21 +1,20 @@
 const express = require('express');
 const app = express();
-//const cors = require('cors');
-//const OpenApiValidator = require('express-openapi-validator');
-//const cache = require('cache-control');
+const OpenApiValidator = require('express-openapi-validator');
 const apicache = require('apicache');
+app.use(express.json());
+
+//const cors = require('cors');
+//const cache = require('cache-control');
 //const auth = require('./middlewares/auth')
 //app.use(cors());
-app.use(express.json());
-//app.use(cache());
-//app.use(apicache);
 /*
 app.use(
     OpenApiValidator.middleware({
         apiSpec: './open-api.yaml'
     })
 );
-*/
+
 /*
 const albumsRouter = require('./routers/albums');
 app.use('/albums',auth, albumsRouter);
