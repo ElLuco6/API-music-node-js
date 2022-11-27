@@ -14,7 +14,7 @@ describe('get all users endpoint', () => {
 
     it('should fail when users not found', async () => {
         const resp = await request(app).get('/users/10');
-        expect(resp.statusCode).toEqual(500);
+        expect(resp.statusCode).toEqual(404);
         expect(resp.body).not.toBeNull();
         expect(resp.body).not.toHaveProperty('data');
        // expect(resp.body).not.toHaveProperty('success');
@@ -67,7 +67,7 @@ describe('post users endpoint', () => {
             userName: 'test',
             password: '10/10/2022'
         });
-        expect(resp.statusCode).toEqual(500);
+        expect(resp.statusCode).toEqual(400);
         expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('success');
         expect(resp.body).toHaveProperty('message');
@@ -120,7 +120,7 @@ describe('put users endpoint', () => {
             
             password: '10/10/2022'
         });
-        expect(resp.statusCode).toEqual(500);
+        expect(resp.statusCode).toEqual(400);
         expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('success');
         expect(resp.body).toHaveProperty('message');
