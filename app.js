@@ -9,11 +9,11 @@ const OpenApiValidator = require('express-openapi-validator');
 app.use(express.json());
 //app.use(cache());
 //app.use(apicache);
-app.use(
+/* app.use(
     OpenApiValidator.middleware({
         apiSpec: './open-api.yaml'
     })
-);
+); */
 /*
 const albumsRouter = require('./routers/albums');
 app.use('/albums',auth, albumsRouter);
@@ -38,6 +38,9 @@ app.use('/users', usersRouter);
 
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews', reviewsRouter);
+
+const musicRouter = require('./routers/music');
+app.use('/music', musicRouter);
 
 //const loginRouter = require('./controller/login');
 //app.use('/login', loginRouter);
