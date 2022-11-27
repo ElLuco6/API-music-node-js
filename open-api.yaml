@@ -24,6 +24,8 @@ tags:
     description: Everything about Reviews
   - name: album
     description: Everything about album
+  - name: music
+    description: Everything about music
 paths:
   /login:
     post:
@@ -31,11 +33,33 @@ paths:
         "200":
           description: "OK"
   
-  /ytb:
-    get:
+  /music/ytb:
+   get:
+      tags:
+        - music
+      summary: Get a discographie
+      operationId: discographie      
       responses:
         "200":
-          description: "OK"
+          description: Track fetched successfully
+          
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /music/top20:
+   get:
+      tags:
+        - music
+      summary: Get top 20 popular song in world
+      operationId: top20
+      responses:
+        "200":
+          description: Track fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Track"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /track:
     get:
       tags:

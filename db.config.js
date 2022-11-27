@@ -1,6 +1,6 @@
 module.exports = {
     hostname: "localhost",
     username: "root",
-    password: "Aq147tar.",
+    password: "SAintsupery*09",
     database: "kaa_rat_ok"
 };
