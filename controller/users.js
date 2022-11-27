@@ -1,4 +1,5 @@
 const usersService = require('../services/users');
+const db = require('../models/index');
 const createError = require('http-errors');
 const apicache = require('apicache')
 
@@ -24,14 +25,15 @@ exports.getUserById = async (req, res, next) => {
 
 exports.addUser = async (req, res, next) => {
    if (req.body && req.body.userName, req.body.password, req.body.isAdmin) {
-      console.log(req.body.userName, req.body.password, req.body.isAdmin)
-      const userCreated = await usersService.addUser(req.body.userName, req.body.password, req.body.isAdmin);
-      console.log(userCreated);
-      if (userCreated) {
-         res.status(201).json({success: true, userId: userCreated.id});
-      } else {
-         next(createError(400, "Error when creating this user, verify your args"));
-      }
+      const userTest = await db.users.findOne({where: {userName: req.body.userName}});
+      if (!userTest){
+         const userCreated = await usersService.addUser(req.body.userName, req.body.password, req.body.isAdmin);
+         if (userCreated) {
+            res.status(201).json({success: true, userId: userCreated.id});
+         } else {
+            next(createError(400, "Error when creating this user, verify your args"));
+         }
+      } else{next(createError(400, 'This userName is already taken'));}
    } else {
       next(createError(400, "Cannot add this user, make sure all args has been sent"));
    }
@@ -61,16 +63,19 @@ exports.updateUser = async (req, res, next) => {
     if (req.params.id) {
        const id = parseInt(req.params.id);
        const users = await usersService.getUserById(id);
+       const userTest = await db.users.findOne({where: {userName: req.body.userName}});
        if (req.body.isAdmin =="true" || req.body.isAdmin == "false"){
          if (users.length === 1) {
-            const nbOfUpdate = await usersService.updateUser(id,req.body.userName, req.body.password, req.body.isAdmin);
-            console.log(nbOfUpdate);
-            if (nbOfUpdate == 1) {
+            if ((!userTest || userTest.userId == users[0].userId)){
+               const nbOfUpdate = await usersService.updateUser(id,req.body.userName, req.body.password, req.body.isAdmin);
                console.log(nbOfUpdate);
-               res.json({success: true,userId: id,userName : req.body.userName ,password: req.body.password,isAdmin:req.body.isAdmin });
-            } else {
-               next(createError(500, 'User already updated with those args'));
-            }
+               if (nbOfUpdate == 1) {
+                  console.log(nbOfUpdate);
+                  res.json({success: true,userId: id,userName : req.body.userName ,password: req.body.password,isAdmin:req.body.isAdmin });
+               } else {
+                  next(createError(500, 'User already updated with those args'));
+               }
+            } else{next(createError(400, 'This userName is already taken'));}
          } else {
             next(createError(404, `The user with id '${id}' doesn't exists, it cannot be updated`));
          }
