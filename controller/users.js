@@ -68,7 +68,7 @@ exports.updateUser = async (req, res, next) => {
        const id = parseInt(req.params.id);
        const users = await usersService.getUserById(id);
        const userTest = await db.users.findOne({where: {userName: req.body.userName}});
-       if (req.body.isAdmin =="true" || req.body.isAdmin == "false"){
+       if (req.body.isAdmin == true || req.body.isAdmin == false){
          if (users.length === 1) {
             if ((!userTest || userTest.userId == users[0].userId)){
                const nbOfUpdate = await usersService.updateUser(id,req.body.userName, req.body.password, req.body.isAdmin);

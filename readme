@@ -1,13 +1,36 @@
-ajouter le sécurity
+Bonjour,
 
-Pour le addUser dans le controlleur faire gaff a bien coder le mot de passe dans le service.
+Notre API KAA_RAT_OK, est une bibliothèque musicale permettant à ces utilisateurs de rechercher des albums, des morceaux ou des artiste.
+Elle permet aussi à l'utilisateur via l'utilisation de l'api de spotify et de youtube music,de consulter
+le top 20 des morceaux les plus populaire sur terre, ainsi que de retourner la discographie complète d'un artiste.
 
-Faire gaff au reviews controller gros doute avec les primary keys etc
+Par manque de temps et pour attester de nos compétences nous avons décidé de rendre une api complète uniquement pour notre table users.
 
+Notre projet contient donc :
+Un fichier openApi complet,
+des Validator,
+Une BDD avec ORM,
+Des routes avec du cache coté serveur
+Un système d'Authentification et autorisation en utilisant JWT, et des routes protéger avec des droit admin
+Un crud User complet
+Utilisation api public/privé avec spotify et youtube music en utilisant Axios
+Un test unitaire complet pour user.
 
-****//////****
-19/11
+--- Gestion du projet.
 
-Controller fais a partir du model du prof voir les différence avec notre api 
-    - Add track, vérif dans le controller qu'elle existe déjà ou on autorise les doublons ? 
----Potentiellement voir ou utiliser le module http de axios. 
+Nous avons utilisé git comme système de versionning dans cet exercice, avec 3 branches :
+- Une branche main qui est notre branche principale
+- Ainsi que 2 branches de développement (Lucas, Simon).
+Après avoir développé le squelette de API sur main nous nous sommes distribuer les tâche et avons chacun commencer a travailler sur ça branche.
+Quand une tache était finis nous la pushions sur main.
+
+Lien du répo : https://github.com/ElLuco6/simon_lucas
+
+Nous sommes aussi restées en contact durant les 15 jours grâce à discord, ou nous partagions notre avancée sur l'api et nous sommes fixées des deadlines.
+
+Durant notre projet, nous avons aussi utilisé postman ,
+d'on nous vous avons fournie une collection non-exhaustive de nos différents tests.
+
+Notre projet et loin d'être parfait, mais nous avons passer beaucoup de temps (vraiment beaucoup) à le développer et nous sommes fier de vous le présenter.
+
+PS Kaa_RAT_OK et un jeu de mots avec kaaris et le karaoké
