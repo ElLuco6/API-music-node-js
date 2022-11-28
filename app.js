@@ -36,7 +36,7 @@ const tracksRouter = require('./routers/tracks');
 app.use('/tracks',tracksRouter);
 
 const usersRouter = require('./routers/users');
-app.use('/users', auth.authMiddlewareAdmin,  usersRouter);
+app.use('/users', /*auth.authMiddlewareAdmin*/  usersRouter);
 
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews', reviewsRouter);
