@@ -52,7 +52,7 @@ paths:
       responses:
         "201":
           description: "OK"
-  /music/ytb:
+  /music/ytb/{artiste}:
    get:
       tags:
         - music
