@@ -7,7 +7,6 @@ const saltRounds = 10;
 
 exports.getUsers = async (req, res, next) => {
    const users = await usersService.getUsers();
-   res.set('Cache-Control', 'max-age=30'); // Using client cache
    if (users && users.length != 0) {
       res.json({success: true, data: users});
    } else {
@@ -34,7 +33,6 @@ exports.addUser = async (req, res, next) => {
       const userTest = await db.users.findOne({where: {userName: req.body.userName}});
       if (!userTest){
          const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds)
-         console.log(encryptedPassword)
          const userCreated = await usersService.addUser(req.body.userName, encryptedPassword, req.body.isAdmin);
          if (userCreated) {
             res.status(201).json({success: true, userId: userCreated.id});
@@ -54,7 +52,6 @@ exports.deleteUserById = async (req, res, next) => {
          const users = await usersService.getUserById(id);
          if (users.length === 1) {
             const nbOfDeletion = await usersService.deleteUserById(id);
-            console.log(nbOfDeletion);
             if (nbOfDeletion === 1) {
                res.json({success: true});
             } else {
@@ -81,9 +78,7 @@ exports.updateUser = async (req, res, next) => {
             if (users.length === 1) {
                if ((!userTest || userTest.userId == users[0].userId)){
                   const nbOfUpdate = await usersService.updateUser(id,req.body.userName, req.body.password, req.body.isAdmin);
-                  console.log(nbOfUpdate);
                   if (nbOfUpdate == 1) {
-                     console.log(nbOfUpdate);
                      res.json({success: true,userId: id,userName : req.body.userName ,password: req.body.password,isAdmin:req.body.isAdmin });
                   } else {
                      next(createError(500, 'User already updated with those args'));
@@ -102,6 +97,7 @@ exports.updateUser = async (req, res, next) => {
        next(createError(400, "UserId missing"));
     }
  }
+
  exports.clearCache = async (req, res,next) => {
     if(apicache.clear("/users/")){
        res.json({success: true});

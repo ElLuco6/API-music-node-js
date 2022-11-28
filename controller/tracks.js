@@ -27,15 +27,15 @@ exports.getTrackById = async (req, res, next) => {
 }
 
 exports.addTrack = async (req, res, next) => {
-   if (req.body && req.body.title && req.body.date) {
+   if (req.body && req.body.trackName && req.body.author && req.body.fromAlbum && req.body.realeaseDate) {
       const trackCreated = await tracksService.addTrack(req.body.trackName, req.body.author, req.body.fromAlbum,req.body.realeaseDate);
       if (trackCreated) {
-         res.status(201).json({success: true, trackId: trackCreated.id});
+         res.status(201).json({success: true, trackId: trackCreated.trackId});
       } else {
          next(createError(400, "Error when creating this track, verify your args"));
       }
    } else {
-      next(createError(400, "Cannot add this track, make sure all args has been sent"));
+      next(createError(400, "Cannot add this track, make sure all args have been sent"));
    }
 }
 
@@ -65,11 +65,11 @@ exports.deleteTrackById = async (req, res, next) => {
 exports.updateTrack = async (req, res, next) => {
     if (req.params.id) {
       if (parseInt(req.params.id)){
-         const id = parseInt(req.params.id);
-         const tracks = await tracksService.getTrackById(id);
+         const trackId = parseInt(req.params.id);
+         const tracks = await tracksService.getTrackById(trackId);
          if (tracks.length === 1) {
-            const nbOfUpdate = await tracksService.updateTrack(id,req.body.trackName, req.body.author, req.body.fromAlbum,req.body.realeaseDate);
-            if (nbOfUpdate === 1) {
+            const nbOfUpdate = await tracksService.updateTrack(trackId,req.body.trackName, req.body.author, req.body.fromAlbum,req.body.realeaseDate);
+            if (nbOfUpdate == 1) {
                res.status(201).json({success: true});
             } else {
                next(createError(500, 'Unknown error when trying to update this track'));
@@ -84,3 +84,11 @@ exports.updateTrack = async (req, res, next) => {
     next(createError(400, "The trackId is required"));
    }
  }
+
+ exports.clearCache = async (req, res,next) => {
+   if(apicache.clear("/tracks/")){
+      res.json({success: true});
+   }else{
+     next(createError(400, "Failled to clear cache"))
+   }
+}
