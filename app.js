@@ -9,13 +9,13 @@ app.use(cookieParser());
 //const cors = require('cors');
 //const cache = require('cache-control');
 //app.use(cors());
-/* 
+/*
 app.use(
     OpenApiValidator.middleware({
         apiSpec: './open-api.yaml'
     })
 );
- */
+
 /*
 const albumsRouter = require('./routers/albums');
 app.use('/albums',auth, albumsRouter);
@@ -36,7 +36,7 @@ const tracksRouter = require('./routers/tracks');
 app.use('/tracks',tracksRouter);
 
 const usersRouter = require('./routers/users');
-app.use('/users', /*auth.authMiddlewareAdmin*/  usersRouter);
+app.use('/users', /*auth.authMiddlewareAdmin,*/  usersRouter);
 
 const reviewsRouter = require('./routers/reviews');
 app.use('/reviews', reviewsRouter);

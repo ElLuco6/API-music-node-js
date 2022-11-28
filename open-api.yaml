@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.0
 info:
   title: KAARAT-OK
   description: This API manage a track Service
@@ -27,12 +27,16 @@ tags:
   - name: music
     description: Everything about music
 paths:
-  /login:
+  /logs/login:
     post:
       responses:
         "200":
           description: "OK"
-  
+  /logs/register:
+    post:
+      responses:
+        "200":
+          description: "OK"
   /music/ytb:
    get:
       tags:
@@ -64,7 +68,7 @@ paths:
     get:
       tags:
         - track
-      summary: Get all track
+      summary: Get all tracks
       description: Return all track available on the kaaraOK
       operationId: getAllTrack
       responses:
@@ -154,7 +158,10 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
   /users:
+    
     get:
+      security:
+        - cookieAuth: []
       tags:
         - users
       summary: Get all user
@@ -170,6 +177,9 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
     post:
+      security:
+        - cookieToken: []
+        - cookieAuth: []
       tags:
         - users
       summary: Add a new user to the database
@@ -185,6 +195,9 @@ paths:
           $ref: "#/components/responses/InternalServerError"
   /users/{id}:
     get:
+      security:
+        - cookieToken: []
+        - cookieAuth: []
       tags:
         - users
       summary: Get a user by its id
@@ -205,10 +218,10 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
     delete:
+      security:
+        - cookieAuth: []
       tags:
         - users
-    security:
-        - bearerAuth: []
       summary: Delete a user by its id
       operationId: deleteUsersById
       parameters:
@@ -229,10 +242,10 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
     put:
+      security:
+        - cookieAuth: []
       tags:
-        - users
-    security:
-       - bearerAuth: []    
+        - users  
       summary: Update a user 
       operationId: updateUser
       parameters:
@@ -646,9 +659,12 @@ components:
                 type: string
                 default: "An unknown server error occurred"
                 example: "An unknown server error occurred"
-    securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: Set your JWT token
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: authCookie
+    cookieToken:
+      type: apiKey
+      in: cookie
+      name: tokenCookie
