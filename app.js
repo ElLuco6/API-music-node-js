@@ -7,13 +7,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-/*
+
 app.use(
     OpenApiValidator.middleware({
         apiSpec: './open-api.yaml'
     })
 );
-*/
+
 const albumsRouter = require('./routers/albums');
 app.use('/albums', albumsRouter);
 

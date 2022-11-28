@@ -5,7 +5,7 @@ const apicache = require('apicache');
 usersController = require('../controller/users');
 
 router.get('/clear', usersController.clearCache);
-router.get('/',cache('1 minute'), usersController.getUsers);
+router.get('/',cache('5 minutes'), usersController.getUsers);
 router.get('/:id', usersController.getUserById);
 router.post('/', usersController.addUser);
 router.put('/:id', usersController.updateUser);

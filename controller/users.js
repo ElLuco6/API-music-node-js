@@ -29,11 +29,14 @@ exports.getUserById = async (req, res, next) => {
 }
 
 exports.addUser = async (req, res, next) => {
+   let isAdmin=false;
+   if (req.originalUrl!= '/logs/register'){isAdmin = req.body.isAdmin;}
    if (req.body && req.body.userName, req.body.password) {
       const userTest = await db.users.findOne({where: {userName: req.body.userName}});
       if (!userTest){
          const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds)
-         const userCreated = await usersService.addUser(req.body.userName, encryptedPassword, req.body.isAdmin);
+         console.log(encryptedPassword)
+         const userCreated = await usersService.addUser(req.body.userName, encryptedPassword, isAdmin);
          if (userCreated) {
             res.status(201).json({success: true, userId: userCreated.id});
          } else {
@@ -77,9 +80,10 @@ exports.updateUser = async (req, res, next) => {
          if (req.body.isAdmin == true || req.body.isAdmin == false){
             if (users.length === 1) {
                if ((!userTest || userTest.userId == users[0].userId)){
-                  const nbOfUpdate = await usersService.updateUser(id,req.body.userName, req.body.password, req.body.isAdmin);
+                  const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds)
+                  const nbOfUpdate = await usersService.updateUser(id,req.body.userName, encryptedPassword, req.body.isAdmin);
                   if (nbOfUpdate == 1) {
-                     res.json({success: true,userId: id,userName : req.body.userName ,password: req.body.password,isAdmin:req.body.isAdmin });
+                     res.json({success: true,userId: id,userName : req.body.userName ,password: encryptedPassword,isAdmin:req.body.isAdmin });
                   } else {
                      next(createError(500, 'User already updated with those args'));
                   }

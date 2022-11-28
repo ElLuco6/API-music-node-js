@@ -14,6 +14,7 @@ exports.getUserById = (userId) => {
 }
 
 exports.addUser = (userName, password, isAdmin) => {
+    console.log(password)
     return db.users.create({userName, password , isAdmin});
     }
 

@@ -75,7 +75,7 @@ exports.updateTrack = async (req, res, next) => {
                next(createError(500, 'Unknown error when trying to update this track'));
             }
          } else {
-            next(createError(404, `The track with id '${id}' doesn't exists, it cannot be updated`));
+            next(createError(404, `The track with id '${trackId}' doesn't exists, it cannot be updated`));
          }
       }else {
          next(createError(400, "Incorrect args"));
