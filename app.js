@@ -8,7 +8,7 @@ const auth = require('./controller/login')
 //const cors = require('cors');
 //const cache = require('cache-control');
 //app.use(cors());
-/*
+
 app.use(
     OpenApiValidator.middleware({
         apiSpec: './open-api.yaml'
