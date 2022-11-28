@@ -13,27 +13,31 @@ app.use(
         apiSpec: './open-api.yaml'
     })
 );
-
+/*
 const albumsRouter = require('./routers/albums');
 app.use('/albums', albumsRouter);
 
+const reviewsRouter = require('./routers/reviews');
+app.use('/reviews', reviewsRouter);
+
+//ressources pas encore implémentées
+*/
 const tracksRouter = require('./routers/tracks');
 app.use('/tracks', auth.authMiddleware, tracksRouter);
 
 const usersRouter = require('./routers/users');
 app.use('/users', auth.authMiddlewareAdmin, usersRouter);
 
-const reviewsRouter = require('./routers/reviews');
-app.use('/reviews', reviewsRouter);
-
-app.get('/cache/index', (req, res) => {
-    res.json(apicache.getIndex())
-  })
 const musicRouter = require('./routers/music');
 app.use('/music', musicRouter);
 
 const loginRouter = require('./routers/login');
 app.use('/logs', loginRouter);
+
+app.get('/cache/index', (req, res) => {
+    res.json(apicache.getIndex())
+  })
+
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500)

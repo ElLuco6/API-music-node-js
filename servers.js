@@ -1,7 +1,7 @@
 const db = require('./models/index');
 const app = require('./app');
 
-db.instance.sync({force: false}).then(() => {
+db.instance.sync({force: true}).then(() => {
     console.log('Database connected an synchronized');
     
     app.listen(3000, () => {
