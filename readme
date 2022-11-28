@@ -4,34 +4,33 @@ Notre API KAA_RAT_OK, est une bibliothèque musicale permettant à ces utilisate
 Elle permet aussi à l'utilisateur via l'utilisation de l'api de spotify et de youtube music,de consulter
 le top 20 des morceaux les plus populaire sur terre, ainsi que de retourner la discographie complète d'un artiste.
 
-Par manque de temps et pour attester de nos compétences nous avons décidé de rendre une api complète uniquement pour notre table users et tracks.
+Par manque de temps et pour attester de nos compétences nous avons décidé de rendre une api complète uniquement pour nos ressources users et tracks.
 
 Notre projet contient donc :
-Un fichier openApi complet,
-des Validator,
-Une BDD avec ORM,
-Des routes avec du cache coté serveur
-Un système d'Authentification et autorisation en utilisant des cookies, et des routes protéger avec des droits admin
---Nous avons utiliser 2 cookies dans notre api . 1 pour admin et l'autre pour token, le but étant de faciliter le parse du cookie et de différentier admin de token.
-
-Un crud User/tracks complet
-Utilisation api public/privé avec spotify et youtube music en utilisant Axios
-Un test unitaire complet pour user (les tests fonctionnent sans le login).
+-Un fichier openApi complet,
+-des Validator,
+-Une BDD avec ORM,
+-Des routes avec du cache coté serveur
+-Un système d'Authentification et autorisation en utilisant des cookies, et des routes protégées avec des droits admin/user
+    --Nous avons utiliser 2 cookies dans notre api : Un pour le champ userCourrant.isAdmin et l'autre pour le token de login, le but étant de faciliter le parse du cookie et de différencier plus facilement isAdmin de token dans le cas où l'on voudrait récupérer seulement l'un ou l'autre.
+-Un crud Users/tracks complet
+-Utilisation api public/privé avec spotify et youtube music en utilisant Axios
+-Un test unitaire complet pour users (nous n'avons pas réussi à nous définir comme déjà login mais les tests fonctionnent sans le middleware d'authentification).
 
 --- Gestion du projet.
 
 Nous avons utilisé git comme système de versionning dans cet exercice, avec 3 branches :
 - Une branche main qui est notre branche principale
 - Ainsi que 2 branches de développement (Lucas, Simon).
-Après avoir développé le squelette de API sur main nous nous sommes distribuer les tâche et avons chacun commencer a travailler sur ça branche.
+Après avoir développé le squelette de l'API sur main nous nous sommes distribué les tâches et avons chacun commencé a travailler sur nos branche.
 Quand une tache était finis nous la pushions sur main.
 
 Lien du répo : https://github.com/ElLuco6/simon_lucas
 
-Nous sommes aussi restées en contact durant les 15 jours grâce à discord, ou nous partagions notre avancée sur l'api et nous sommes fixées des deadlines.
+Nous sommes aussi restées en contact durant les 15 jours grâce à discord où nous partagions notre avancée sur l'api. Nous nous sommes également fixé des deadlines (Jamais respectées bien évidement, on est pas fous non plus).
 
 Durant notre projet, nous avons aussi utilisé postman ,
-d'on nous vous avons fournie une collection non-exhaustive de nos différents tests.
+d'on nous vous avons fournie une collection pour faciliter une première utilisation. (scriptSQL_CollectionPostman/COLLECTION_KAA-RAT-OK_API.postman_collection.json)
 
 Notre projet et loin d'être parfait, mais nous avons passer beaucoup de temps (vraiment beaucoup) à le développer et nous sommes fier de vous le présenter.
 
