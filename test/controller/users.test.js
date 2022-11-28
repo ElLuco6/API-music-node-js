@@ -1,8 +1,22 @@
 const request = require('supertest');
 const app = require('../../app');
 
+
+describe('login endpoint', () => {
+    it("Responds with the administrator's information", async (done) => {
+     const resp =  await request(app).post('/logs/login')
+        .send({
+          userName: 'SCH',
+          password: 'ADMIN'
+        })
+        expect(resp.statusCode).toEqual(200);
+        done();
+    });
+  });
+
 describe('get all users endpoint', () => {
     it('should return collection of users', async () => {
+
         const resp = await request(app).get('/users');
         expect(resp.statusCode).toEqual(200);
         expect(resp.body).not.toBeNull();

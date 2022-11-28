@@ -1,4 +1,4 @@
-INSERT INTO users (username,password,isadmin)VALUES ('SCH','fusil',true);
+INSERT INTO users (username,password,isadmin)VALUES ('SCH','$2b$10$uBH.r3mxlKTEbX6LGIcpTu1jREnRsUcf1LjVi3VwUSLhEEBafcu0a',true);
 INSERT INTO users (username,password,isadmin)VALUES ('LaFève','zaza',true);
 INSERT INTO users (username,password,isadmin)VALUES ('RoiHeenok','38spécial',false);
 
