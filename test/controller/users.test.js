@@ -2,12 +2,41 @@ const request = require('supertest');
 const app = require('../../app');
 
 
+describe('register users endpoint', () => {
+    it('should add users successfully', async () => {
+        const resp = await request(app).post('/logs/register').send({
+            userName: "TEST",
+            password: "ADMIN",
+            isAdmin : true
+        });
+        expect(resp.statusCode).toEqual(201);
+        expect(resp.body).not.toBeNull();
+        expect(resp.body).toHaveProperty('success');
+       // expect(resp.body).toHaveProperty('message');
+        expect(resp.body.success).toBeTruthy();
+    });
+
+    it('should fail when property to add userName is missing', async () => {
+        const resp = await request(app).post('/users').send({
+            userName: "TEST",
+            
+            isAdmin : true
+        });
+        expect(resp.statusCode).toEqual(400);
+        expect(resp.body).not.toBeNull();
+        expect(resp.body).toHaveProperty('success');
+        expect(resp.body).toHaveProperty('message');
+        expect(resp.body.success).toBeFalsy();
+    });
+});
+
 describe('login endpoint', () => {
     it("Responds with the administrator's information", async (done) => {
      const resp =  await request(app).post('/logs/login')
         .send({
-          userName: 'SCH',
-          password: 'ADMIN'
+            userName: "TEST",
+            password: "ADMIN",
+
         })
         expect(resp.statusCode).toEqual(200);
         done();
@@ -65,7 +94,7 @@ describe('get users by id endpoint', () => {
 describe('post users endpoint', () => {
     it('should add users successfully', async () => {
         const resp = await request(app).post('/users').send({
-            userName: 'test',
+            userName: 'testo',
             password: '10/10/2022',
             isAdmin: true
         });

@@ -50,6 +50,7 @@ exports.authMiddleware = async (req, res, next) => {
 }
 
 exports.login = async (req, res) => {
+    console.log(req.body, req.body.password);
     if (req.body.userName && req.body.password) {
         const user = await db.users.findOne({
             where: {userName: req.body.userName}
