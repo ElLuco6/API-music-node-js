@@ -1,10 +1,8 @@
-const apicache = require('apicache')
-      cache = apicache.middleware;
 const express = require('express'),
-      router = express.Router(),
-      usersController = require('../controller/users');
-
-
+      router = express.Router();
+const apicache = require('apicache');
+      cache = apicache.middleware;
+usersController = require('../controller/users');
 
 router.get('/clear', usersController.clearCache);
 router.get('/',cache('1 minute'), usersController.getUsers);
