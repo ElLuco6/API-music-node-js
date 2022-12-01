@@ -22,7 +22,7 @@ describe('register users endpoint', () => {
             
             isAdmin : true
         });
-        expect(resp.statusCode).toEqual(400);
+        expect(resp.statusCode).toEqual(401);
         expect(resp.body).not.toBeNull();
         expect(resp.body).toHaveProperty('success');
         expect(resp.body).toHaveProperty('message');

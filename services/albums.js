@@ -17,7 +17,7 @@ exports.addAlbum = (albumName, author, realeaseDate) => {
 }
 
 exports.updateAlbum = (albumName, author, realeaseDate) => {
-    return db.users.update(
+    return db.albums.update(
         {
             albumName: albumName,
             author: author,

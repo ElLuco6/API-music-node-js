@@ -8,7 +8,7 @@ router.get('/:id', tracksController.getTrackById);
 //router.get('/:id/review', reviewsController.getReviewById);
 router.post('/', tracksController.addTrack);
 //router.post('/',loginMiddleware, tracksController.addTrack);
-router.put('/', tracksController.updateTrack);
+router.put('/:id', tracksController.updateTrack);
 router.delete('/:id', tracksController.deleteTrackById);
 //router.delete('/:id',loginMiddleware, tracksController.deleteTrackById);
 

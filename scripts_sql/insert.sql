@@ -5,23 +5,30 @@ INSERT INTO users (username,password,isadmin)VALUES ('RoiHeenok','38spécial',fa
 INSERT INTO tracks (trackName,author,fromAlbum,realeaseDate)VALUES ('SEVRAN','Kaaris','orNoir',2014-11-11);
 INSERT INTO tracks (trackName,author,fromAlbum,realeaseDate)VALUES ('ICARUS','HAARPER','zulu',2014-11-11);
 INSERT INTO tracks (trackName,author,fromAlbum,realeaseDate)VALUES ('RIP','playboi CARTI','DIE LIT',2014-11-11);
-select * from tracks
 
-; trackId: {
+INSERT INTO album (albumName,author,realeaseDate)VALUES ('orNoir','Kaaris',2014-11-11);
+INSERT INTO album (albumName,author,realeaseDate)VALUES ('zulu','HAARPER',2014-11-11);
+INSERT INTO album (albumName,author,realeaseDate)VALUES ('DIE LIT','playboi CARTI',2014-11-11);
+
+select * from album
+
+   return instance.define('album', {
+        albumId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        trackName: {
+        albumName: {
             type: DataTypes.STRING,
         },
         author: {
             type: DataTypes.STRING,
         },
-        fromAlbum: {
-            type: DataTypes.STRING,
-        },
         realeaseDate: {
             type: DataTypes.DATE,
         }
+    }, {
+        timestamps: false
+    });
+}

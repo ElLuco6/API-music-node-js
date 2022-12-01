@@ -8,6 +8,7 @@ router.get('/:id', albumsController.getAlbumById);
 router.post('/', albumsController.addAlbum);
 //router.post('/',loginMiddleware, albumsController.addAlbum);
 router.delete('/:id', albumsController.deleteAlbumById);
+router.put('/:id', albumsController.updateAlbum);
 //router.delete('/:id',loginMiddleware, albumsController.deleteAlbumById);
 
 module.exports = router;

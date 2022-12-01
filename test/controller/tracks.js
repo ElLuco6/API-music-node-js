@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../app');
+const app = require('../../app');
 
 describe('get tracks endpoint', () => {
     it('should return collection of tracks', async () => {
