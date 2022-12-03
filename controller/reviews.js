@@ -4,7 +4,7 @@ const createError = require('http-errors');
 exports.getReviews = async (req, res) => {
    const review = await reviewsService.getReviews();
    res.set('Cache-Control', 'max-age=30'); // Using client cache
-   res.json({success: true, data: reviews});
+   res.json({success: true, data: review});
 }
 
 exports.getReviewById = async (req, res, next) => {
@@ -18,7 +18,7 @@ exports.getReviewById = async (req, res, next) => {
 }
 
 exports.addReview = async (req, res, next) => {
-   if (req.body && req.body.title && req.body.date) {
+   if (req.body && req.body.rating && req.body.ratingDate) {
       const reviewCreated = await reviewsService.addReview(req.body.rating, req.body.ratingDate);
       if (reviewCreated) {
          res.status(201).json({success: true, trackId: reviewCreated.trackid, userId:reviewCreated.userId});
