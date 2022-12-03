@@ -69,7 +69,7 @@ exports.updateAlbum = async (req, res, next) => {
       if (parseInt(req.params.id)){
          const albumId = parseInt(req.params.id);
          const albums = await albumsService.getAlbumById(albumId);
-         console.log(albums);
+        
          if (albums.length === 1) {
             const nbOfUpdate = await albumsService.updateAlbum(albumId,req.body.albumName, req.body.author, req.body.realeaseDate);
             if (nbOfUpdate == 1) {

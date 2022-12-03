@@ -16,12 +16,14 @@ exports.addAlbum = (albumName, author, realeaseDate) => {
     return db.albums.create({albumName, author, realeaseDate});
 }
 
-exports.updateAlbum = (albumName, author, realeaseDate) => {
+exports.updateAlbum = (albumId,albumName, author, realeaseDate) => {
     return db.albums.update(
         {
             albumName: albumName,
             author: author,
             realeaseDate : realeaseDate,
+        },{
+            where: { albumId: albumId },
         }
       );
 }

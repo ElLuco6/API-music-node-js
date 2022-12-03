@@ -13,16 +13,18 @@ exports.getTrackById = (trackId) => {
 }
 
 exports.addTrack = (trackName, author, fromAlbum, realeaseDate) => {
-    return db.tracks.create({trackName, author, fromAlbum, realeaseDate});
+    return db.tracks.create({trackName,author,fromAlbum,realeaseDate});
 }
 
-exports.updateTrack = (trackName, author, fromAlbum, realeaseDate) => {
-    return db.users.update(
+exports.updateTrack = (trackId, trackName, author, fromAlbum, realeaseDate) => {
+    return db.tracks.update(
         {
             trackName: trackName,
             author: author,
             fromAlbum : fromAlbum,
             realeaseDate : realeaseDate
+        },{
+            where: { trackId: trackId },
         }
       );
 }

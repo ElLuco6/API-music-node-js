@@ -10,25 +10,27 @@ INSERT INTO album (albumName,author,realeaseDate)VALUES ('orNoir','Kaaris',2014-
 INSERT INTO album (albumName,author,realeaseDate)VALUES ('zulu','HAARPER',2014-11-11);
 INSERT INTO album (albumName,author,realeaseDate)VALUES ('DIE LIT','playboi CARTI',2014-11-11);
 
-select * from album
 
-   return instance.define('album', {
-        albumId: {
+INSERT INTO reviews (trackId,userId,rating,ratingDate)VALUES (1,1,5,'2014-11-11');
+INSERT INTO reviews (trackId,userId,rating,ratingDate)VALUES (2,2,5,'2014-11-11');
+INSERT INTO reviews (trackId,userId,rating,ratingDate)VALUES (3,3,5,'2014-11-11');
+trackId: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        albumName: {
-            type: DataTypes.STRING,
+        userId: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull: false
         },
-        author: {
-            type: DataTypes.STRING,
+        rating: {
+            type: DataTypes.INTEGER,
         },
-        realeaseDate: {
+        ratingDate: {
             type: DataTypes.DATE,
         }
-    }, {
-        timestamps: false
-    });
-}
+
+select * from album
+
+   
