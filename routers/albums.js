@@ -1,9 +1,11 @@
 const express = require('express'),
       router = express.Router(),
       albumsController = require('../controller/albums');
-      //loginMiddleware = require();
+const apicache = require('apicache');
+      cache = apicache.middleware;
 
-router.get('/', albumsController.getAlbums);
+router.get('/clear', albumsController.clearCache);
+router.get('/',cache('5 minutes'), albumsController.getAlbums);
 router.get('/:id', albumsController.getAlbumById);
 router.post('/', albumsController.addAlbum);
 //router.post('/',loginMiddleware, albumsController.addAlbum);

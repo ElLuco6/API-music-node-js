@@ -50,10 +50,10 @@ exports.deleteAlbumById = async (req, res, next) => {
             if (nbOfDeletion === 1) {
                res.json({success: true});
             } else {
-               next(createError(500, 'Unknown error when trying to delete this albums, maybe it\'s already deleted'));
+               next(createError(500, 'Unknown error when trying to delete this album, maybe it\'s already deleted'));
             }
          } else {
-            next(createError(404, `The albums with id '${id}' doesn't exists, it cannot be deleted`));
+            next(createError(404, `The album with id '${id}' doesn't exists, it cannot be deleted`));
          }
       }else {
          next(createError(400, "Incorrect args"));
@@ -75,10 +75,10 @@ exports.updateAlbum = async (req, res, next) => {
             if (nbOfUpdate == 1) {
                res.status(201).json({success: true});
             } else {
-               next(createError(500, 'Unknown error when trying to update this albums'));
+               next(createError(500, 'Unknown error when trying to update this album'));
             }
          } else {
-            next(createError(404, `The albums with id '${albumId}' doesn't exists, it cannot be updated`));
+            next(createError(404, `The album with id '${albumId}' doesn't exists, it cannot be updated`));
          }
       }else {
          next(createError(400, "Incorrect args"));
@@ -91,6 +91,14 @@ exports.updateAlbum = async (req, res, next) => {
  
 
  exports.clearCache = async (req, res,next) => {
+   if(apicache.clear("/albums/")){
+      res.json({success: true});
+   }else{
+     next(createError(400, "Failled to clear cache"))
+   }
+}
+
+exports.clearCache = async (req, res,next) => {
    if(apicache.clear("/albums/")){
       res.json({success: true});
    }else{
