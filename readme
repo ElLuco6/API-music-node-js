@@ -4,7 +4,7 @@ Notre API KAA_RAT_OK, est une bibliothèque musicale permettant à ces utilisate
 Elle permet aussi à l'utilisateur via l'utilisation de l'api de spotify et de youtube music,de consulter
 le top 20 des morceaux les plus populaire sur terre, ainsi que de retourner la discographie complète d'un artiste.
 
-Par manque de temps et pour attester de nos compétences nous avons décidé de rendre une api complète uniquement pour nos ressources users et tracks.
+Par manque de temps et pour attester de nos compétences nous avons décidé de rendre une api complète uniquement pour nos ressources users, tracks et albums (pas de reviews).
 
 Notre projet contient donc :
 -Un fichier openApi complet,
@@ -13,10 +13,10 @@ Notre projet contient donc :
 -Des routes avec du cache coté serveur
 -Un système d'Authentification et autorisation en utilisant des cookies, et des routes protégées avec des droits admin/user
     --Nous avons utiliser 2 cookies dans notre api : Un pour le champ userCourrant.isAdmin et l'autre pour le token de login, le but étant de faciliter le parse du cookie et de différencier plus facilement isAdmin de token dans le cas où l'on voudrait récupérer seulement l'un ou l'autre.
--Un crud Users/tracks complet
+-Un crud Users/tracks/albums complet
 -Utilisation api public/privé avec spotify et youtube music en utilisant Axios
 -Un test unitaire complet pour users (nous n'avons pas réussi à nous définir comme déjà login mais les tests fonctionnent sans le middleware d'authentification).
-
+-Un test unitaire complet pour albums et tracks.
 --- Gestion du projet.
 
 Nous avons utilisé git comme système de versionning dans cet exercice, avec 3 branches :
@@ -35,3 +35,5 @@ d'on nous vous avons fournie une collection pour faciliter une première utilisa
 Notre projet et loin d'être parfait, mais nous avons passer beaucoup de temps (vraiment beaucoup) à le développer et nous sommes fier de vous le présenter.
 
 PS Kaa_RAT_OK et un jeu de mots avec kaaris et le karaoké
+
+Lucas Saint-supéry, Simon Cazenaze
