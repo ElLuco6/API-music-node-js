@@ -35,7 +35,6 @@ exports.addUser = async (req, res, next) => {
       const userTest = await db.users.findOne({where: {userName: req.body.userName}});
       if (!userTest){
          const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds)
-         console.log(encryptedPassword)
          const userCreated = await usersService.addUser(req.body.userName, encryptedPassword, isAdmin);
          if (userCreated) {
             res.status(201).json({success: true, userId: userCreated.id});
